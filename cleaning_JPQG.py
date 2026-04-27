@@ -1,13 +1,13 @@
-# Title: Cleaning of Grammar 'Japanese Question & Positive Sentences Grammar' [JQPSG]
+# Title: Cleaning of Grammar 'Japanese Positive Question Grammar' [JPQG]
 # Author: Rodrigo Hurtado 
 # Student ID: A01713854 
 
 # Description: Usage of the Natural Language Processing Toolkit in Python
 # to demostrate the ambiguity and left recursion present in the original 
-# JQPSG.
+# JPQG.
 
 # Introduction of the test sentence (correct sentence)
-sentence = "ima ni saito-san to mariko-san ha niwa de takai kaban wo kaimasu ka"
+sentence = "kyou saito-san to mariko-san ha niwa de sono rodrigo-san no takai kaban wo kaimasu ka"
 
 # 1. Original Japanese Question & Positive Sentence Grammar 
 
@@ -20,12 +20,12 @@ from nltk import CFG
 
 nltk.download('punkt_tab')
 
-print('===== 1. Original Japanese Question & Positive Sentence Grammar =====')
+print('===== 1. Original Japanese Polar Question Grammar =====')
 
 # Definition of the context-free grammar - JQPSG
 grammar = CFG.fromstring("""
     S -> T H F A
-    A -> 'ka' |
+    A -> 'ka'
     T -> T 'ni' | 'ima' | 'kyou' | 'ashita' |
     H -> N 'ha'
     N -> E 'to' N | E
@@ -65,7 +65,7 @@ if trees:
         print()
 
 
-# 2. Clearning Japanese Question & Positive Sentence Grammar Part 1. Elimination of Left Recursion
+# 2. Clearning JPQG Part 1. Elimination of Left Recursion
 
 # Remaining Ambiguity:  N -> E 'to' N | E
 #                       E -> M | C | N
@@ -74,7 +74,7 @@ if trees:
 print('==== 2. Clearning Part 1. Elimination of Left Recursion =====')
 grammar = CFG.fromstring("""
     S -> T H F A
-    A -> 'ka' |
+    A -> 'ka'
     T -> 'ima' I | 'kyou' I | 'ashita' I |
     I -> 'ni'|    
     H -> N 'ha'
@@ -105,15 +105,16 @@ if trees:
         tree.pretty_print()
         print()
 
-# 3. Clearning Japanese Question & Positive Sentence Grammar Part 2. Elimination of Ambiguity
+# 3. Clearning JPQG Part 2. Elimination of Ambiguity
 
 # No remaining ambiguity
 
 
 print('==== 3. Clearning Part 2. Elimination of Ambiguity =====')
+
 grammar = CFG.fromstring("""
     S -> T H F A
-    A -> 'ka' |
+    A -> 'ka'
     T -> 'ima' I | 'kyou' I | 'ashita' I |
     I -> 'ni' |    
     H -> N 'ha'
