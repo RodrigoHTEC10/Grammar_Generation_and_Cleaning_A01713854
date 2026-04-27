@@ -505,6 +505,7 @@ $E \rightarrow$ `to` $M E \mid$ `to` $C E \mid \varepsilon$
 </div>
 
 Eliminating the ambiguity from the given grammar.
+
 <br>
 
 ### Final clean version
@@ -582,7 +583,6 @@ N is the nonterminal that either chooses a name ($M$) or profession ($C$) and ca
 - $E$ $\rightarrow$ `to` $M \ E \mid$ `to` $C \ E \mid \varepsilon$ 
 
 E introduces the possibility to add more subjects to the already added one of either the same options name ($M$) or profession ($C$) and stop this addition cycle of subjects with $\varepsilon$.
-
 
 - $M$ $\rightarrow$ `saito-san` $\mid$ `mariko-san` $\mid$ `mira-san` $\mid$ `santos-san` $\mid$ `sakura-san` $\mid$ `juan-san` $\mid$ `alexis-san` $\mid$ `rodrigo-san` $\mid$ `nico-san` $\mid$ `diego-san` $\mid$ `watashi` $\mid$ `anata` 
 
@@ -859,9 +859,13 @@ To finally which on the 'Start/Reset' button to see the creation process of the 
 
 As the sentence is the same, the parse tree generated here should be identical (contain the same branches and leaves despite their order) to the implementation in the <code>nltk</code>
 
-The final result is the following:
+The final result processed in steps is the following:
 
-[Insert Images Here]
+<div align=center>
+<img width="800" height="1000" alt="Parse Trees No.1" src="https://github.com/user-attachments/assets/3bab23d8-9075-4767-b47c-2008ffd6e180" />
+<img width="800" height="1000" alt="Parse Trees No.2" src="https://github.com/user-attachments/assets/db881066-5b53-43cc-b2f9-519990739b83" />
+<img width="800"  alt="Parse Trees No.3" src="https://github.com/user-attachments/assets/54e49718-4dc3-4dae-81ee-e66ce47ac20b" />
+</div>
 
 <br>
 
@@ -1017,19 +1021,25 @@ The **Chomsky Hierarchy** developed by Noam Chosmky in the decade of 1950s, is a
 
 Before being able to classify the original and final **JPQG**, each type of the hierarchy will be decomposed:
 
+<br>
 | Type | Grammar | Production | Language | Machine |
 |------|--------|------------|----------|---------|
 | Type 0 | Unrestricted grammars, phrase-structured grammars | α → β, where α ∈ (V ∪ Σ)^+ and β ∈ (V ∪ Σ)^* | Recursively enumerable languages | Turing machine |
-| Type 1 | Context-Sensitive grammars, Monotonic grammars | αAβ → αγβ, where γ ∈ (V ∪ Σ)^+ and |αγβ| ≥ |αAβ| | Context-Sensitive languages | Linear-bounded automata |
+| Type 1 | Context-Sensitive grammars, Monotonic grammars | αAβ → αγβ, where γ ∈ (V ∪ Σ)^+ and (αγβ) ≥ (αAβ) | Context-Sensitive languages | Linear-bounded automata |
 | Type 2 | Context-Free grammars | A → γ, where A ∈ V and γ ∈ (V ∪ Σ)^* | Context-Free languages | Pushdown automata |
 | Type 3 | Regular grammars, Left-linear / Right-linear grammars | A → aB \| a (right-linear) OR A → Ba \| a (left-linear) | Regular languages | Deterministic and nondeterministic finite automata |
+<br>
 
 It is important to mention that each type in the hierarchy is also part of the lower types, as a Type 2 is also Type 1 and 0 simultaneously; however, no Type 3. The higher the type goes, the more limited or restricted are the rules and the grammar productions that create the characteristics of these grammars.
 
 The productions of the original JPQG and the final JPQG have no real difference between their form as the only modification of them were the left-recursion and ambiguity eliminations, yet the form of the productions stayed as:
+
 <div align=center>
+
 $A \rightarrow y$ Where A ∈ V and γ ∈ (V ∪ Σ)^*
+
 </div>
+
 As none of the leftside of any production or any of both grammars has more than one non-terminal and none terminals, the inmediate rejection of any of them being a Context-Sensitive grammar and therefore Type 1 is confirmed. On the other side, many of the productions in both grammars surpass the productions of a Grammar of Type 3 in the Chomsky hierarchy as the initial state of S having 3 non-terminals and one terminal, or the O production having either two or three non-terminals, leaving behind any idea of being a Type 3.
 
 The connection of these three facts lead to the classifications of both grammars as a Type 2 making them Context-Free grammars.
