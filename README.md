@@ -353,6 +353,13 @@ kyou saito-san to mariko-san ha niwa de sono rodrigo-san no takai kaban wo kaima
 
 Example sentence: kyou saito-san to mariko-san ha niwa de sono rodrigo-san no takai kaban wo kaimasu ka
 
+<div align=center>
+
+<img width="600" alt="Screenshot From 2026-04-26 22-29-56" src="https://github.com/user-attachments/assets/291f7bb1-76a0-4fea-83d2-f8db0d20cbbb" />
+  
+<img width="600" alt="Screenshot From 2026-04-26 22-30-14" src="https://github.com/user-attachments/assets/e7499ba5-1904-4e87-b65c-24c7cf5f02cb" />
+
+</div>
 
 ## Cleaning
 At this point the grammar is complete, yet it present some problems that make the parse of the grammar by a given string to find more than one path for
