@@ -40,7 +40,7 @@ grammar = CFG.fromstring("""
     B -> 'kono' | 'sono' | 'ano'
     W -> N 'no' |
     X -> D G | G
-    D -> 'kawaii' | 'ookii' | 'chiisai' | 'yasai' | 'takai'
+    D -> 'kawaii' | 'ookii' | 'chiisai' | 'yasui' | 'takai'
     G -> 'hon' | 'koohi' | 'nooto' | 'zaashi' | 'kasa' | 'kaban' | 'kuruma' | 'terebi' | 'wain'
     V -> 'kaimasu' | 'misemasu' | 'mimasu' | 'agemasu' | 'kashimasu' | 'hoshiimasu' | 'urimasu' | 'hakobimasu' | 'sutemasu'
 """)
@@ -90,7 +90,7 @@ grammar = CFG.fromstring("""
     B -> 'kono' | 'sono' | 'ano'
     W -> N 'no' |
     X -> D G | G
-    D -> 'kawaii' | 'ookii' | 'chiisai' | 'yasai' | 'takai'
+    D -> 'kawaii' | 'ookii' | 'chiisai' | 'yasui' | 'takai'
     G -> 'hon' | 'koohi' | 'nooto' | 'zaashi' | 'kasa' | 'kaban' | 'kuruma' | 'terebi' | 'wain'
     V -> 'kaimasu' | 'misemasu' | 'mimasu' | 'agemasu' | 'kashimasu' | 'hoshiimasu' | 'urimasu' | 'hakobimasu' | 'sutemasu'
 """)
@@ -130,7 +130,7 @@ grammar = CFG.fromstring("""
     B -> 'kono' | 'sono' | 'ano'
     W -> N 'no' |
     X -> D G | G
-    D -> 'kawaii' | 'ookii' | 'chiisai' | 'yasai' | 'takai'
+    D -> 'kawaii' | 'ookii' | 'chiisai' | 'yasui' | 'takai'
     G -> 'hon' | 'koohi' | 'nooto' | 'zaashi' | 'kasa' | 'kaban' | 'kuruma' | 'terebi' | 'wain'
     V -> 'kaimasu' | 'misemasu' | 'mimasu' | 'agemasu' | 'kashimasu' | 'hoshiimasu' | 'urimasu' | 'hakobimasu' | 'sutemasu'
 """)

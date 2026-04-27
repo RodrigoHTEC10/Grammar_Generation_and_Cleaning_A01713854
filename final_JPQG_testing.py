@@ -39,7 +39,7 @@ valid_sentences = [
     "mariko-san ha kouen de kawaii hon wo mimasu ka",
     "watashi ha daigaku de ookii nooto wo kaimasu ka",
     "sensei ha ichiba de chiisai koohi wo kaimasu ka",
-    "isha ha konbini de yasai kaban wo kaimasu ka",
+    "isha ha konbini de yasui kaban wo kaimasu ka",
 
     # Multiple nouns — to particle
     "saito-san to mariko-san ha kono kaban wo kaimasu ka",
@@ -53,7 +53,7 @@ valid_sentences = [
     "mariko-san ha kawaii hon wo mimasu ka",
     "watashi ha ookii nooto wo kaimasu ka",
     "sensei ha chiisai koohi wo kaimasu ka",
-    "isha ha yasai kaban wo kaimasu ka",
+    "isha ha yasui kaban wo kaimasu ka",
 
     # With simple possesive
     "saito-san ha kono watashi no kaban wo kaimasu ka",
@@ -71,21 +71,21 @@ valid_sentences = [
 
     # With time + place + possesive + adjective
     "rodrigo-san ha konbini de kono watashi no chiisai kaban wo kaimasu ka",
-    "nico-san ha daigaku de sono saito-san no yasai hon wo mimasu ka",
+    "nico-san ha daigaku de sono saito-san no yasui hon wo mimasu ka",
     "mariko-san ha ginkou de sono saito-san no takai hon wo mimasu ka",
     "watashi ha niwa de alexis-san to diego-san no ookii nooto wo kaimasu ka",
     "nico-san ha ichiba de sono keikan to isha no kawaii zaashi wo kaimasu ka",
 
     # With place + possesive + adjective
     "rodrigo-san ha konbini de kono watashi no chiisai kaban wo kaimasu ka",
-    "nico-san ha daigaku de sono saito-san no yasai hon wo mimasu ka",
+    "nico-san ha daigaku de sono saito-san no yasui hon wo mimasu ka",
     "mariko-san ha ginkou de sono saito-san no takai hon wo mimasu ka",
     "watashi ha niwa de alexis-san to diego-san no ookii nooto wo kaimasu ka",
     "nico-san ha ichiba de sono keikan to isha no kawaii zaashi wo kaimasu ka",
 
     # With time + place + possesive + adjective
     "ima rodrigo-san ha konbini de kono watashi no chiisai kaban wo kaimasu ka",
-    "kyou nico-san ha daigaku de sono saito-san no yasai hon wo mimasu ka",
+    "kyou nico-san ha daigaku de sono saito-san no yasui hon wo mimasu ka",
     "ashita ni mariko-san ha ginkou de sono saito-san no takai hon wo mimasu ka",
     "ima ni watashi ha niwa de alexis-san to diego-san no ookii nooto wo kaimasu ka",
     "kyou ni nico-san ha ichiba de sono keikan to isha no kawaii zaashi wo kaimasu ka",
@@ -153,7 +153,7 @@ invalid_sentences = [
     "mariko-san ha hon kawaii wo mimasu ka",
     "watashi ha nooto ookii wo kaimasu ka",
     "anata ha kaban chiisai wo kaimasu ka",
-    "saito-san ha kaban yasai wo kaimasu ka",
+    "saito-san ha kaban yasui wo kaimasu ka",
 
     # Incorrect verb placement
     "saito-san ha kaimasu kono kaban wo",
@@ -212,7 +212,7 @@ grammar = CFG.fromstring("""
     B -> 'kono' | 'sono' | 'ano'
     W -> N 'no' |
     X -> D G | G
-    D -> 'kawaii' | 'ookii' | 'chiisai' | 'yasai' | 'takai'
+    D -> 'kawaii' | 'ookii' | 'chiisai' | 'yasui' | 'takai'
     G -> 'hon' | 'koohi' | 'nooto' | 'zaashi' | 'kasa' | 'kaban' | 'kuruma' | 'terebi' | 'wain'
     V -> 'kaimasu' | 'misemasu' | 'mimasu' | 'agemasu' | 'kashimasu' | 'hoshiimasu' | 'urimasu' | 'hakobimasu' | 'sutemasu'
 """)
