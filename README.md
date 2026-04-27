@@ -145,7 +145,7 @@ $$V_N = \{ S, A, T, I, H, N, E, M, C, F, P, K, J, O, B, W, X, D, G, V \}$$
 | Non-terminal | Production |
 |---|---|
 | $S$ | $\rightarrow T \ H \ F \ A$ |
-| $A$ | $\rightarrow$ `ka` $\mid \varepsilon$ |
+| $A$ | $\rightarrow$ `ka` |
 | $T$ | $\rightarrow T$ `ni` $\mid$ `ima` $\mid$ `kyou` $\mid$ `ashita` $\mid \varepsilon$ |
 | $H$ | $\rightarrow N$ `ha` |
 | $N$ | $\rightarrow E$ `to` $N \mid E$ |
@@ -158,7 +158,7 @@ $$V_N = \{ S, A, T, I, H, N, E, M, C, F, P, K, J, O, B, W, X, D, G, V \}$$
 | $J$ | $\rightarrow O$ `wo` $V \mid O$ `ikura` `desu` |
 | $O$ | $\rightarrow B \ W \ X \mid W \ X$ |
 | $B$ | $\rightarrow$ `kono` $\mid$ `sono` $\mid$ `ano` |
-| $W$ | $\rightarrow M$ `no` $\mid C$ `no` $\mid \varepsilon$ |
+| $W$ | $\rightarrow N$ `no` $\mid \varepsilon$ |
 | $X$ | $\rightarrow D \ G \mid G$ |
 | $D$ | $\rightarrow$ `kawaii` $\mid$ `ookii` $\mid$ `chiisai` $\mid$ `yasai` $\mid$ `takai` |
 | $G$ | $\rightarrow$ `hon` $\mid$ `koohi` $\mid$ `nooto` $\mid$ `zaashi` $\mid$ `kasa` $\mid$ `kaban` $\mid$ `kuruma` $\mid$ `terebi` $\mid$ `wain` |
@@ -395,7 +395,10 @@ Furthermore, the importance of the elimination of ambiguity in computational ter
 
 The left-recursion is present at the mere start of the grammar, at the production:
 
+<div align=center>
+
 $T$ $\rightarrow T$ `ni` $\mid$ `ima` $\mid$ `kyou` $\mid$ `ashita` $\mid \varepsilon$
+</div>
 
 This production has the form A $\rightarrow A$ a | B, which can be solved using the following formula:
 
@@ -411,22 +414,29 @@ A' $\rightarrow a$ A' | $\varepsilon$
 
 **Resolution**
 
+<div align=center>
+
 $T$ $\rightarrow$ `ima` I  $\mid$ `kyou` I $\mid$ `ashita` I $\mid$ $\varepsilon$ 
 
 $I$ $\rightarrow $ `ni` I $\mid$  $\varepsilon$ 
+</div>
 
 By passing the actual time words to the first terminal and only calling the second terminal to use the particle 'ni', the elimination of the left-recursion is successfull. However, a modification based on the grammar constraint that a particle can not be presented more than two times and the actual I non-terminal allows it the following modification is made:
+<div align=center>
 
 $I$ $\rightarrow $ `ni` $\mid$  $\varepsilon$ 
+</div>
 
 <br>
 
 ### Ambiguity cleaning
 The ambiguity on the other hand, is presented by two non-terminals when trying to connect several subjects at the same time through the use of the particle to(と).
+<div align=center>
 
 $N$ $\rightarrow E$ `to` $N \mid E$ 
 
 $E$ $\rightarrow M \mid C \mid N$ 
+</div>
 
 As the parser is able to form the connection: saito-san to mariko-san as:
 
@@ -455,32 +465,48 @@ As more than one derivation tree can be obtained to determine a string belongs t
 **Resolution**
 In order to observe the influence of each element into N, the substitution of E into N is performed:
 
+<div align=center>
+
 $N$ $\rightarrow (C \mid M \mid N)$ `to` $N \mid (C \mid M \mid N)$ 
+</div>
 
 By making an expantion of it we obtain:
 
+<div align=center>
+
 $N$ $\rightarrow C$ `to`$N \mid M$ `to` $N \mid N$ `to` $N \mid C \mid M \mid N$ 
+</div>
 
 As N->N and N only affirm the existance and identity of N these can be eliminated giving:
 
+<div align=center>
+
 $N$ $\rightarrow C$ `to`$N \mid M$ `to` $N \mid C \mid M$ 
+</div>
 
 Now, by assuming the division of this statement into an $A$ a | B format similar to the previous example we can get:
 
+<div align=center>
+
 B = $C$ `to`$N \mid M$ `to` $N \mid C \mid M$
 
-a = `to` $N$ |  $\varepsilon$ 
+a = `to` $N$ |  $\varepsilon$
+</div>
 
 Applying the same elimination method as before, the rewrite of the non-terminals become:
+<div align=center>
 
 $N \rightarrow M E \mid C E $
 
 $E \rightarrow$ `to` $M E \mid$ `to` $C E \mid \varepsilon$ 
+</div>
 
 Eliminating the ambiguity from the given grammar.
 <br>
 
 ### Final clean version
+
+After both cleaning interventions in order to be able to parse the grammar with an LL(1) parsing algorithm, the final result is the following:
 
 <div align=center>
 
@@ -499,7 +525,7 @@ Conserving the same $S$ and $V_T$
 | Non-terminal | Production |
 |---|---|
 | $S$ | $\rightarrow T \ H \ F \ A$ |
-| $A$ | $\rightarrow$ `ka` $\mid \varepsilon$ |
+| $A$ | $\rightarrow$ `ka` $ |
 | $T$ | $\rightarrow$ `ima` $I \mid$ `kyou` $I \mid$ `ashita` $I \mid \varepsilon$ |
 | $I$ | $\rightarrow$ `ni` $\mid \varepsilon$ |
 | $H$ | $\rightarrow N$ `ha` |
@@ -513,36 +539,439 @@ Conserving the same $S$ and $V_T$
 | $J$ | $\rightarrow O$ `wo` $V \mid O$ `ikura` `desu` |
 | $O$ | $\rightarrow B \ W \ X \mid W \ X$ |
 | $B$ | $\rightarrow$ `kono` $\mid$ `sono` $\mid$ `ano` |
-| $W$ | $\rightarrow M$ `no` $\mid C$ `no` $\mid \varepsilon$ |
+| $W$ | $\rightarrow N$ `no` $\mid \varepsilon$ |
 | $X$ | $\rightarrow D \ G \mid G$ |
 | $D$ | $\rightarrow$ `kawaii` $\mid$ `ookii` $\mid$ `chiisai` $\mid$ `yasai` $\mid$ `takai` |
 | $G$ | $\rightarrow$ `hon` $\mid$ `koohi` $\mid$ `nooto` $\mid$ `zaashi` $\mid$ `kasa` $\mid$ `kaban` $\mid$ `kuruma` $\mid$ `terebi` $\mid$ `wain` |
 | $V$ | $\rightarrow$ `kaimasu` $\mid$ `misemasu` $\mid$ `mimasu` $\mid$ `agemasu` $\mid$ `kashimasu` $\mid$ `hoshiimasu` $\mid$ `urimasu` $\mid$ `hakobimasu` $\mid$ `sutemasu` |
-
 </div>
+
+As it can be appreciated, the **$I$** non-terminal symbol joined as a result for the elimination of the left-recusion in the **$T$** non-terminal, while **$N$** and **$E$** are still part of the grammar now completely rewritten in order to avoid ambiguity.
+
+As the final version of the grammar, an explanation of each production will be given in detail:
+
+- $S$ $\rightarrow T \ H \ F \ A$
+
+Starting point that declares the available non-terminals that any string in L must have, whicth is T (time), H (subject(s)), F (object + verb) + A (question particle ka(か))
+
+- $A$ $\rightarrow$ `ka`$ 
+
+Question particle (か). Taken away from the original **S** in order to have a more clear visuallization of the parse tree.
+
+- $T$ $\rightarrow$ `ima` $I \mid$ `kyou` $I \mid$ `ashita` $I \mid \varepsilon$ 
+
+Time non-terminal. This non-terminal introduces the possibility to add a time to the question, it chooses one among three options and calls for an I substitution or nothing at all.
+
+- $I$ $\rightarrow$ `ni` $\mid \varepsilon$ 
+
+Auxiliar non-terminal for $T$ that adds the ni particle (に) after an specific time, or particle at all which is also allowed for those specific times.
+
+- $H$ $\rightarrow N$ `ha` 
+
+Non-terminal that calls the subjects with the non-terminal N and forces the addition of the particle ha (は) which works indistintly between one or many subjects.
+
+- $N$ $\rightarrow M \ E \mid C \ E$ 
+
+N is the nonterminal that either chooses a name ($M$) or profession ($C$) and calls for the substitution of the non-terminal E. This forces the selection of either one subject at least.
+
+- $E$ $\rightarrow$ `to` $M \ E \mid$ `to` $C \ E \mid \varepsilon$ 
+
+E introduces the possibility to add more subjects to the already added one of either the same options name ($M$) or profession ($C$) and stop this addition cycle of subjects with $\varepsilon$.
+
+
+- $M$ $\rightarrow$ `saito-san` $\mid$ `mariko-san` $\mid$ `mira-san` $\mid$ `santos-san` $\mid$ `sakura-san` $\mid$ `juan-san` $\mid$ `alexis-san` $\mid$ `rodrigo-san` $\mid$ `nico-san` $\mid$ `diego-san` $\mid$ `watashi` $\mid$ `anata` 
+
+Non-terminal that collects all subject names available in the JPQG.
+
+$C$ $\rightarrow$ `gakusei` $\mid$ `sensei` $\mid$ `isha` $\mid$ `keikan` $\mid$ `shioubashi` 
+
+Non-terminal that collects all professions available in the JPQG.
+
+- $F$ $\rightarrow P \ J$ 
+
+Third non-terminal in the starting point that introduces the possibility to add a place through the non-terminal $P$ and an object with a verb through $J$.
+
+- $P$ $\rightarrow K$ `de` $\mid \varepsilon$ 
+
+Non-terminal responsible for the addition or ommission of a place by calling just one specific place through the substitution of $K$ and uses the particle de (で) or ommit it.
+
+- $K$ $\rightarrow$ `kouen` $\mid$ `niwa` $\mid$ `daigaku` $\mid$ `ichiba` $\mid$ `ginkou` $\mid$ `kiisaten` $\mid$ `umi` $\mid$ `konbini` 
+
+Non-terminal that collects all places available in the JPQG.
+
+- $J$ $\rightarrow O$ `wo` $V \mid O$ `ikura` `desu` 
+
+Non-terminal that forces the usage of an object and a verb, it might be one of the $V$ verbs or the question of "How much does it costs...?" with an object.
+
+- $O$ $\rightarrow B \ W \ X \mid W \ X $
+
+Non-terminal that introduces the form of a complete object in the JPQG, which may choose to have a demostrative $B$ or not, and enforces the substitution of $W$ and $X$.
+
+- $B$ $\rightarrow$ `kono` $\mid$ `sono` $\mid$ `ano` 
+
+Non-terminal that collects all demostratives available in the JPQG.
+
+- $W$ $\rightarrow N$ `no` $\mid \varepsilon$
+
+Non-terminal that allows the possibility of adding a posession to the object in the string, this calls again for the $N$ non-terminal which allows for one or more subjects, and therefore, objects.
+
+- $X$ $\rightarrow D \ G \mid G$ 
+
+Object non-terminal that allows the possibility to add an i-adjective through substitution of the $D$ non-terminal and an object. 
+
+$D$ $\rightarrow$ `kawaii` $\mid$ `ookii` $\mid$ `chiisai` $\mid$ `yasai` $\mid$ `takai` 
+
+Non-terminal that collects all i-adjectives available in the JPQG.
+
+$G$ $\rightarrow$ `hon` $\mid$ `koohi` $\mid$ `nooto` $\mid$ `zaashi` $\mid$ `kasa` $\mid$ `kaban` $\mid$ `kuruma` $\mid$ `terebi` $\mid$ `wain` 
+
+Non-terminal that collects all objects available in the JPQG.
+
+$V$ $\rightarrow$ `kaimasu` $\mid$ `misemasu` $\mid$ `mimasu` $\mid$ `agemasu` $\mid$ `kashimasu` $\mid$ `hoshiimasu` $\mid$ `urimasu` $\mid$ `hakobimasu` $\mid$ `sutemasu` 
+
+Non-terminal that collects all verbs available in the JPQG.
+
 <br>
 
 ## Implementation
-
+Once the grammar is clean its implementation was performed in two environments.
 <br>
 
 ### Use of the Natural Language Processing Toolkit
 
+Using the python library of **Natural Language Processing Toolkit** <code>nltk</code>, there is the possibility to process a given grammar, to make it into a parser and parse a given sentence in order to determine if the string can be generated by the grammar or not.
+
+This process is performed through four steps:
+1. Making the given grammar a parsing algorithm using the function <code>ChartParser</code>.
+2. Tokenize the given string to parse using the function <code>word_tokenize(sentence, language="english")</code>.
+3. Obtaining all parsing parsing trees if any is available using the parser on the tokenize sentence <code>list(parser.parse(tokens))</code>.
+4. Printing the trees using <code>pretty_print()</code>.
+
+The details of the implementation can be consulted in either the cleaning_JPQG.py or the final_JPQG_testing.py files in the present repository.
+
+Below and to prove the final version of the Japanese Polar Questions Grammar is tested with the same sentence of the section: Example of the Japanese Polar Question Grammar.
+
+Example sentence: kyou saito-san to mariko-san ha niwa de sono rodrigo-san no takai kaban wo kaimasu ka.
+
+Obtained parse tree.
+
+[Insert image here]
+
+As it can be observed, only one tree was found to parse the same sentence as before, which supports the elimination of ambiguity in the grammar and its possibility to be processed by an LL(1) parser.
+
+**Note**: Its important to notice that the words in the parse tree are not in the same order as the sentence, but all the used words are there respecting the given structure. This is caused as the particles are considered first in the parsing of the tree as they are secured before the actual remaining non-terminals that require substitution are.
+
+This does not invalidate either the grammar nor the parsing singularity, but only reflects how the parse or performed and later printed by the <code>nltk</code>.
+
 <br>
 
 ### Use of the LL(1) Parser Visualzation
+
+To prove the usability of the grammar within a LL(1) parsing algorithm the available tool of [**LL(1) Parser Visualization**](https://www.cs.princeton.edu/courses/archive/spring20/cos320/LL1/) provided freely and online by Princeton University will be used .
+
+The provided tool will generate the required tables: First & Follow Table and the Transition tables necessary to create a PDA (Push Down Automaton) for parsing a given string tokenized with the inserted grammar following the previously described restrictions of the parser.
+
+However, before going to the implementation of the grammar, the introduction of some concepts is necessary:
+
+In a similar way a finite automaton can determine the actual belonging of a word to a regular language, which was established and designed previously in the  
+[**Implementation of a Lexical Anakysis**](https://github.com/RodrigoHTEC10/Implementation_Lexical_Analysis_A01713854); a push down automata can perform the same for a context-free language as the addition of a memory stack surpass the previous limitations of a finite automata to do so.
+
+The formal definition of a Push Down Automata is the following:
+A **pushdown automaton** is a sextuple (Q,Σ,Γ,δ,q0,F), where Q is a finite set of states, Σ is a finite set called in input alphabet, Γ is a finite set called the stack alphabet, q0 is the start state, and δ the transition functions between the states of the PDA from Q X(Σ U {$\lambda$}) X (Γ U {$\lambda$}) to subsets of Q X (Γ U {$\lambda$}). (Sudkamp, 1998)
+
+In difference to a finite automata where the transition between states depended only on the available archs and the following char of the string, in the PDA, the transition denoted by δ depends on the current state Q, the following input a, the actual symbol A at the top of the stack Γ, and the availability of the existance of this transition indicated in the Transition Table.
+
+The movement and transition inside a PDA can be observed which a Transition table that depicts based on the input and state in stack which is the next state.
+
+A deterministic PDA could be seen or used as a LL(1) parsing algorithm thanks to the restrictions both share when traversing through a string in order to determine if such string can ve validly created from the given grammar (at the end of the string parsing, the PDA finishes at a valid final state).
+
+Once the previous process has been defined and making clear that both types of tables: First & Follow Table and the Transition table are required to build a PDA, the implementation process is described below.
+
+1. Insertion of the grammar.
+
+In order to use the LL(1) Parser Visualization, the given grammar must be in a precise format, which in the conversion of the JPQG is the following:
+
+
+```
+start ::= T H F A
+A ::= ka
+A ::= ''
+T ::= kyou I
+T ::= ima I
+T ::= ashita I
+T ::= ''
+I ::= ''
+I ::= ni
+H ::= N ha
+N ::= M E
+N ::= C E
+E ::= to N2 E
+E ::= ''
+N2 ::= C
+N2 ::= M
+M ::= saito-san
+M ::= mariko-san
+M ::= mira-san
+M ::= santos-san
+M ::= sakura-san
+M ::= juan-san
+M ::= alexis-san
+M ::= rodrigo-san
+M ::= nico-san
+M ::= diego-san
+M ::= watashi
+M ::= anata
+C ::= gakusei
+C ::= sensei
+C ::= isha
+C ::= keikan
+C ::= shioubashi
+F ::= P J
+P ::= K de
+P ::= ''
+K ::= kouen
+K ::= niwa
+K ::= daigaku
+K ::= ichiba
+K ::= ginkou
+K ::= kiisaten
+K ::= umi
+K ::= konbini
+J ::= O J2
+J2 ::= wo V
+J2 ::= ikura desu
+O ::= B W X
+O ::= W X
+B ::= kono
+B ::= sono
+B ::= ano
+W ::= N no
+W ::= ''
+X ::= D G
+X ::= G
+D ::= kawaii
+D ::= ookii
+D ::= chiisai
+D ::= yasai
+D ::= takai
+G ::= hon
+G ::= koohi
+G ::= nooto
+G ::= zaashi
+G ::= kasa
+G ::= kaban
+G ::= kuruma
+G ::= terebi
+G ::= wain
+V ::= kaimasu
+V ::= misemasu
+V ::= mimasu
+V ::= agemasu
+V ::= kashimasu
+V ::= hoshiimasu
+V ::= urimasu
+V ::= hakobimasu
+V ::= sutemasu
+```
+Applied modifications:
+
+- Development of J2: As the non-terminal O was present in two cases of J, the development of J2 goes towards storing the remaining difference than J.
+<div align=center>
+
+$J \rightarrow O $
+
+$J2 \rightarrow$ `wo` $V \mid$ `ikura desu` 
+</div>
+
+- Development of N2: Similarly to the problem of J2, the repetition of 'to' in two cases of M and C lead to the creation of JS to be either M or C leading to the following development.
+
+<div align=center>
+
+$E \rightarrow $ `to` $N2 E \mid \varepsilon$
+
+$N2 \rightarrow C \mid M$ 
+</div>
+
+
+2. Tables generation
+Once the grammar has been inserted, by clicking the button 'Generate tables' the following outcome is produced.
+
+#### FIRST / FOLLOW Table
+
+> Legend:  
+> ✔ = Nullable  
+> ✖ = Not nullable  
+
+> Note:  
+> `{names}` = {saito-san, mariko-san, mira-san, santos-san, sakura-san, juan-san, alexis-san, rodrigo-san, nico-san, diego-san, watashi, anata}  
+> `{classes}` = {gakusei, sensei, isha, keikan, shioubashi}  
+> `{places}` = {kouen, niwa, daigaku, ichiba, ginkou, kiisaten, umi, konbini}  
+> `{objects}` = {hon, koohi, nooto, zaashi, kasa, kaban, kuruma, terebi, wain}  
+> `{adjectives}` = {kawaii, ookii, chiisai, yasai, takai}  
+
+
+| Nonterminal | Nullable | FIRST | FOLLOW |
+|------------|----------|-------|--------|
+| S | ✖ | {kyou, ima, ashita} ∪ {names} ∪ {classes} | — |
+| start | ✖ | {kyou, ima, ashita} ∪ {names} ∪ {classes} | {$} |
+| A | ✔ | {ka} | {$} |
+| T | ✔ | {kyou, ima, ashita} | {names} ∪ {classes} |
+| I | ✔ | {ni} | {names} ∪ {classes} |
+| H | ✖ | {names} ∪ {classes} | {places} ∪ {names} ∪ {classes} ∪ {adjectives} ∪ {objects} ∪ {kono, sono, ano} |
+| N | ✖ | {names} ∪ {classes} | {ha, no} |
+| E | ✔ | {to} | {ha, no} |
+| N2 | ✖ | {names} ∪ {classes} | {ha, to, no} |
+| M | ✖ | {names} | {ha, to, no} |
+| C | ✖ | {classes} | {ha, to, no} |
+| F | ✖ | {places} ∪ {names} ∪ {classes} ∪ {adjectives} ∪ {objects} ∪ {kono, sono, ano} | {ka, $} |
+| P | ✔ | {places} | {kono, sono, ano} ∪ {names} ∪ {classes} ∪ {adjectives} ∪ {objects} |
+| K | ✖ | {places} | {de} |
+| J | ✖ | {kono, sono, ano} ∪ {names} ∪ {classes} ∪ {adjectives} ∪ {objects} | {ka, $} |
+| J2 | ✖ | {wo, ikura} | {ka, $} |
+| O | ✖ | {kono, sono, ano} ∪ {names} ∪ {classes} ∪ {adjectives} ∪ {objects} | {wo, ikura} |
+| B | ✖ | {kono, sono, ano} | {names} ∪ {classes} ∪ {adjectives} ∪ {objects} |
+| W | ✔ | {names} ∪ {classes} | {adjectives} ∪ {objects} |
+| X | ✖ | {adjectives} ∪ {objects} | {wo, ikura} |
+| D | ✖ | {adjectives} | {objects} |
+| G | ✖ | {objects} | {wo, ikura} |
+| V | ✖ | {kaimasu, misemasu, mimasu, agemasu, kashimasu, hoshiimasu, urimasu, hakobimasu, sutemasu} | {ka, $} |
+
+#### Transition Table
+Due to the extention of the generated Transition Table for the LL(1), this can be consulted in the file **transition_table.csv** available in the present repository.
+
+
+3. Parsing
+Finally to secure the implementation, the example sentence must be inserted in the form field 'Token stream separated by spaces', which is the following
+
+```
+kyou saito-san to mariko-san ha niwa de sono rodrigo-san no takai kaban wo kaimasu ka
+```
+
+To finally which on the 'Start/Reset' button to see the creation process of the parse tree for the given sentence.
+
+As the sentence is the same, the parse tree generated here should be identical (contain the same branches and leaves despite their order) to the implementation in the <code>nltk</code>
+
+The final result is the following:
+
+[Insert Images Here]
 
 <br>
 
 ## Testing
+To prove correct the design of the given grammar, a series of tests where performed in both implementation places.
 
 <br>
 
 ### Use of the Natural Language Processing Toolkit
+The file <code>final_JPQG_testing.py</code> is a Python file that collects the printing of the testing sentence previouly presented and the testing of 115 sentences through the parser generated by the given grammar.
+
+The 115 sentences are divided in two arrays: <code>valid_sentences</code> [55 sentences] and <code>invalid_sentences</code> [60 sentences] which are run automatically once the file is compiled and ran.
+
+At the end of each array tested a counter is presented showing the:
+```
+Approved sentences: [NO. of approved sentences] / [Total of sentences in the array]
+Rejected sentences: [NO. of rejected sentences] / [Total of sentences in the array]
+```
+In the present section, 8 of these sentences will be shown (4 approved and 4 rejected) and explained in detail.
+
+**Approved Sentences**
+1."rodrigo-san ha konbini de kono watashi no chiisai kaban wo kaimasu ka"
+
+[Insert Image]
+
+In this ocurrence only the time is ommited, the remaining elements available are present and both times N is called it only refers to one subject.
+
+
+2."mariko-san ha ginkou de sono saito-san no takai hon wo mimasu ka"
+
+[Insert Image]
+
+Same as Example 1.
+
+3. "kyou ni nico-san to rodrigo-san ha ichiba de sono keikan to isha no kawaii zaashi wo kaimasu ka"
+
+[Insert Image]
+
+Usage of time, place, adjective, demostratives and double subjects in possesive and sentence subject.
+
+4. "ima ni watashi ha alexis-san to diego-san no ookii nooto ikura desu ka"
+
+[Insert Image]
+
+Usage of time, adjective and double subjects in possesive.
+
+
+**Rejected Sentences**
+1."ashita ima ni saito-san ha kono kaban wo kaimasu ka"
+
+```
+Sentence:ashita ima ni saito-san ha kono kaban wo kaimasu ka REJECTED
+```
+
+Double use of a time word, which is not supported by the grammar.
+
+2."saito-san ga kono kaban wo kaimasu ka"
+
+```
+Sentence:saito-san ga kono kaban wo kaimasu ka REJECTED
+```
+
+Usage of incorrect particle ga (が) instead of ha (は), not supported by the grammar.
+
+3."mariko-san ha kono hon kaimasu ka"
+
+```
+Sentence:mariko-san ha kono hon kaimasu ka REJECTED
+```
+
+Particle wo (を) required and not present between the object and the verb. 
+
+4."ashita ni mariko-san ha kono kaban de wo kaimasu ka"
+
+```
+Sentence:ashita ni mariko-san ha kono kaban de wo kaimasu ka REJECTED
+```
+
+Incorrect usage of particle de (で) as it does not refer to any place and is used after an object.
 
 <br>
 
 ### Use of the LL(1) Parser Visualzation
+As tests can not automatized in the LL(1) online parser, the same 8 sentences presented below were tested and their visual result is exposed below in order to reassure the design of the JPQG.
+
+**Approved Sentences**
+1."rodrigo-san ha konbini de kono watashi no chiisai kaban wo kaimasu ka"
+
+[Insert Image]
+
+2."mariko-san ha ginkou de sono saito-san no takai hon wo mimasu ka"
+
+[Insert Image]
+
+3. "kyou ni nico-san ha ichiba de sono keikan to isha no kawaii zaashi wo kaimasu ka"
+
+[Insert Image]
+
+4. "ima ni watashi ha niwa de alexis-san to diego-san no ookii nooto ikura desu ka"
+
+[Insert Image]
+
+**Rejected Sentences**
+1."ashita ima ni saito-san ha kono kaban wo kaimasu ka"
+
+[Insert Image]
+
+2."saito-san ga kono kaban wo kaimasu ka"
+
+[Insert Image]
+
+3."mariko-san ha kono hon kaimasu ka"
+
+[Insert Image]
+
+4."ashita ni mariko-san ha kono kaban de wo kaimasu ka"
+
+[Insert Image]
 
 <br>
 

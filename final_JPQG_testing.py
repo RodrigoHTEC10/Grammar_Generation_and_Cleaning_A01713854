@@ -186,7 +186,7 @@ invalid_sentences = [
 
 # Tree sentence
 
-sentence = "saito-san to mariko-san ha niwa de takai kaban wo kaimasu ka"
+sentence = "ashita ima ni saito-san ha kono kaban wo kaimasu ka"
 
 import nltk
 from nltk import CFG
@@ -222,16 +222,21 @@ tokens = nltk.word_tokenize(sentence, language='english')
 trees = list(parser.parse(tokens))
 
 if trees:
+    print()
     print(f"Found {len(trees)} parse tree(s):\n")
     for i, tree in enumerate(trees):
         print(f"--- Tree {i+1} ---")
         tree.pretty_print()
         print()
+else:
+    print()
+    print(f"Sentence:{sentence} REJECTED")
 
 counter = 0
 rej_counter = 0
-
+print()
 print("=============== APPROVED SENTENCES ===============\n")
+print()
 for ele in valid_sentences:
     try:
         tokens = nltk.word_tokenize(ele, language='english')
@@ -275,5 +280,5 @@ for ele in invalid_sentences:
 
 print()
 print(f"Approved sentences: {counter} / {len(invalid_sentences)}")
-print(f"Approved sentences: {rej_counter} / {len(invalid_sentences)}")
+print(f"Rejected sentences: {rej_counter} / {len(invalid_sentences)}")
 
