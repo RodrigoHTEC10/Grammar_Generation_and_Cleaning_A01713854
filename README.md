@@ -655,7 +655,9 @@ Example sentence: kyou saito-san to mariko-san ha niwa de sono rodrigo-san no ta
 
 Obtained parse tree.
 
-[Insert image here]
+<div align=center>
+<img width="800" alt="Screenshot From 2026-04-27 07-50-22" src="https://github.com/user-attachments/assets/acfcf813-0ed4-43e3-8f56-1add45c8d0ce" />
+</div>
 
 As it can be observed, only one tree was found to parse the same sentence as before, which supports the elimination of ambiguity in the grammar and its possibility to be processed by an LL(1) parser.
 
@@ -877,26 +879,33 @@ In the present section, 8 of these sentences will be shown (4 approved and 4 rej
 **Approved Sentences**
 1."rodrigo-san ha konbini de kono watashi no chiisai kaban wo kaimasu ka"
 
-[Insert Image]
+<div align=center>
+<img width="800" alt="Screenshot From 2026-04-27 10-53-00" src="https://github.com/user-attachments/assets/37331fc0-441d-439d-9b56-6adc70a3339a" />
+</div>
 
 In this ocurrence only the time is ommited, the remaining elements available are present and both times N is called it only refers to one subject.
 
-
 2."mariko-san ha ginkou de sono saito-san no takai hon wo mimasu ka"
 
-[Insert Image]
+<div align=center>
+<img width="800" alt="Screenshot From 2026-04-27 10-53-32" src="https://github.com/user-attachments/assets/6c7a234f-3b62-49d5-8896-7262102409c8" />
+</div>
 
 Same as Example 1.
 
 3. "kyou ni nico-san to rodrigo-san ha ichiba de sono keikan to isha no kawaii zaashi wo kaimasu ka"
 
-[Insert Image]
+<div align=center>
+<img width="800" alt="Screenshot From 2026-04-27 10-54-02" src="https://github.com/user-attachments/assets/6f350bb5-75a8-4e31-90ed-a50df076638b" />
+</div>
 
 Usage of time, place, adjective, demostratives and double subjects in possesive and sentence subject.
 
 4. "ima ni watashi ha alexis-san to diego-san no ookii nooto ikura desu ka"
 
-[Insert Image]
+<div align=center>
+<img width="800" alt="Screenshot From 2026-04-27 10-54-32" src="https://github.com/user-attachments/assets/f82ff157-cc1b-413a-bdc8-34db673cea7b" />
+</div>
 
 Usage of time, adjective and double subjects in possesive.
 
@@ -942,36 +951,54 @@ As tests can not automatized in the LL(1) online parser, the same 8 sentences pr
 **Approved Sentences**
 1."rodrigo-san ha konbini de kono watashi no chiisai kaban wo kaimasu ka"
 
-[Insert Image]
+<div align=center>
+<img width="800" alt="Screenshot From 2026-04-27 11-10-20" src="https://github.com/user-attachments/assets/2133d456-4853-4c1e-8de7-683c6587b3bc" />
+</div>
 
 2."mariko-san ha ginkou de sono saito-san no takai hon wo mimasu ka"
 
-[Insert Image]
+<div align=center>
+<img width="800" alt="Screenshot From 2026-04-27 11-11-09" src="https://github.com/user-attachments/assets/2166a825-f8e2-430a-b381-9c60af86496d" />
+</div>
 
 3. "kyou ni nico-san ha ichiba de sono keikan to isha no kawaii zaashi wo kaimasu ka"
 
-[Insert Image]
+<div align=center>
+<img width="800" alt="Screenshot From 2026-04-27 11-12-05" src="https://github.com/user-attachments/assets/1df689ad-ab04-45db-bb3c-e73546099b74" />
+</div>
 
 4. "ima ni watashi ha niwa de alexis-san to diego-san no ookii nooto ikura desu ka"
 
-[Insert Image]
+<div align=center>
+<img width="800" alt="Screenshot From 2026-04-27 11-13-02" src="https://github.com/user-attachments/assets/c00d0d55-bd99-4ffd-8a9a-c29416da2135" />
+</div>
 
 **Rejected Sentences**
 1."ashita ima ni saito-san ha kono kaban wo kaimasu ka"
 
-[Insert Image]
+<div align=center>
+<img width="400" alt="Screenshot From 2026-04-27 11-15-14" src="https://github.com/user-attachments/assets/32ae6559-43f9-4eee-8bd3-ed6ae3ef424b" />
+</div>
 
 2."saito-san ga kono kaban wo kaimasu ka"
 
-[Insert Image]
+<div align=center>
+<img width="400" alt="Screenshot From 2026-04-27 11-16-03" src="https://github.com/user-attachments/assets/f074cf32-5970-4adb-8d4d-c4f3f2d4187d" />
+</div>
 
 3."mariko-san ha kono hon kaimasu ka"
 
-[Insert Image]
+<div align=center>
+<img width="400" alt="Screenshot From 2026-04-27 11-16-57" src="https://github.com/user-attachments/assets/a58c8268-99b7-4a7e-bba6-2ff15125cc1a" />
+</div>
 
 4."ashita ni mariko-san ha kono kaban de wo kaimasu ka"
 
-[Insert Image]
+<div align=center>
+<img width="400" alt="Screenshot From 2026-04-27 11-17-43" src="https://github.com/user-attachments/assets/954da2e5-cf3b-4e6c-b057-221b3084f6fb" />
+</div>
+
+As it can be previously seen, the rejection of strings in the LL(1) developed by Princeton is more evident that the rejection of the program developed with the <code>nltk</code>, yet still the obtention of the same results in both implementations support the correct JPQG design. And that the usage of the same sentences in both places produces the same results.
 
 <br>
 
@@ -992,3 +1019,11 @@ As tests can not automatized in the LL(1) online parser, the same 8 sentences pr
 <br>
 
 # References
+
+Essential Japanese grammar: A comprehensive guide for beginners. (2024, febrero 28). Verbalplanet.com; Verbalplanet. https://www.verbalplanet.com/learn-japanese/blog/basics-of-japanese-grammar.asp
+
+Grammar in theory of computation. (2021, enero 16). GeeksforGeeks. https://www.geeksforgeeks.org/theory-of-computation/introduction-to-grammar-in-theory-of-computation/
+
+Tofugu. (s/f). Learn Japanese: A ridiculously detailed guide. Tofugu. Recuperado el 27 de abril de 2026, de https://www.tofugu.com/learn-japanese/
+
+University of Canterbury Computer Science Education Research Group. (s/f). Grammars and parsing - formal languages - computer science field guide. Org.Nz. Recuperado el 27 de abril de 2026, de https://www.csfieldguide.org.nz/en/chapters/formal-languages/grammars-and-parsing/
