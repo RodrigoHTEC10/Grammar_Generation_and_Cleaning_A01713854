@@ -25,7 +25,7 @@ A grammar is composed of two concepts:
 ```
 noun -> 'dog', 'cat', 'I', 'you', ...
 ```
-
+<br>
 From these elements the **rules** or **productions** of the grammar are defined as the formal instructions of how a nonterminal symbol can be rewritten as a sequence of terminals and non-terminals.
 
 To generate a string starting from the starting point of the grammar *S*, we perform a series of derivations using the defined productions of the grammar to substitute nonterminal symbols for other equivalent nonterminals or terminals until we end up with a valid string of the language. 
@@ -59,6 +59,7 @@ The japanese writing system uses three scripts:
 - Kanji (患者 [かんじ]) logographic characters where each kanji represents one word or concept.
 
 However, in this evidence, only romaji (ローマ字) will be used, which is the writting of japanese sounds in the Latin alphabet. This due to avoid problems during parsing and make a more understandable grammar.
+<br>
 
 ### Sentence Structure
 
@@ -69,6 +70,7 @@ Example.
 I eat sushi
 私 (I) は 寿司 (sushi) を 食べます (eat)
 ```
+<br>
 
 ### Particles
 
@@ -112,6 +114,7 @@ The designed grammar is called "Japanese Polar Question Grammar", but will be ab
 
 Below, the original grammar with left recursion and ambiguity is presented:
 
+<br>
 <div align=center>
 
 ### Formal Grammar Definition
@@ -508,6 +511,7 @@ Eliminating the ambiguity from the given grammar.
 
 After both cleaning interventions in order to be able to parse the grammar with an LL(1) parsing algorithm, the final result is the following:
 
+<br>
 <div align=center>
 
 #### Formal Grammar Definition
@@ -545,6 +549,7 @@ Conserving the same $S$ and $V_T$
 | $G$ | $\rightarrow$ `hon` $\mid$ `koohi` $\mid$ `nooto` $\mid$ `zaashi` $\mid$ `kasa` $\mid$ `kaban` $\mid$ `kuruma` $\mid$ `terebi` $\mid$ `wain` |
 | $V$ | $\rightarrow$ `kaimasu` $\mid$ `misemasu` $\mid$ `mimasu` $\mid$ `agemasu` $\mid$ `kashimasu` $\mid$ `hoshiimasu` $\mid$ `urimasu` $\mid$ `hakobimasu` $\mid$ `sutemasu` |
 </div>
+<br>
 
 As it can be appreciated, the **$I$** non-terminal symbol joined as a result for the elimination of the left-recusion in the **$T$** non-terminal, while **$N$** and **$E$** are still part of the grammar now completely rewritten in order to avoid ambiguity.
 
@@ -635,7 +640,6 @@ Non-terminal that collects all verbs available in the JPQG.
 
 ## Implementation
 Once the grammar is clean its implementation was performed in two environments.
-<br>
 
 ### Use of the Natural Language Processing Toolkit
 
@@ -794,6 +798,7 @@ $E \rightarrow $ `to` $N2 E \mid \varepsilon$
 $N2 \rightarrow C \mid M$ 
 </div>
 
+<br>
 
 2. Tables generation
 Once the grammar has been inserted, by clicking the button 'Generate tables' the following outcome is produced.
@@ -841,6 +846,7 @@ Once the grammar has been inserted, by clicking the button 'Generate tables' the
 #### Transition Table
 Due to the extention of the generated Transition Table for the LL(1), this can be consulted in the file **transition_table.csv** available in the present repository.
 
+<br>
 
 3. Parsing
 Finally to secure the implementation, the example sentence must be inserted in the form field 'Token stream separated by spaces', which is the following
@@ -952,50 +958,50 @@ As tests can not automatized in the LL(1) online parser, the same 8 sentences pr
 1."rodrigo-san ha konbini de kono watashi no chiisai kaban wo kaimasu ka"
 
 <div align=center>
-<img width="800" alt="Screenshot From 2026-04-27 11-10-20" src="https://github.com/user-attachments/assets/2133d456-4853-4c1e-8de7-683c6587b3bc" />
+<img width="600" alt="Screenshot From 2026-04-27 11-10-20" src="https://github.com/user-attachments/assets/2133d456-4853-4c1e-8de7-683c6587b3bc" />
 </div>
 
 2."mariko-san ha ginkou de sono saito-san no takai hon wo mimasu ka"
 
 <div align=center>
-<img width="800" alt="Screenshot From 2026-04-27 11-11-09" src="https://github.com/user-attachments/assets/2166a825-f8e2-430a-b381-9c60af86496d" />
+<img width="600" alt="Screenshot From 2026-04-27 11-11-09" src="https://github.com/user-attachments/assets/2166a825-f8e2-430a-b381-9c60af86496d" />
 </div>
 
 3. "kyou ni nico-san ha ichiba de sono keikan to isha no kawaii zaashi wo kaimasu ka"
 
 <div align=center>
-<img width="800" alt="Screenshot From 2026-04-27 11-12-05" src="https://github.com/user-attachments/assets/1df689ad-ab04-45db-bb3c-e73546099b74" />
+<img width="600" alt="Screenshot From 2026-04-27 11-12-05" src="https://github.com/user-attachments/assets/1df689ad-ab04-45db-bb3c-e73546099b74" />
 </div>
 
 4. "ima ni watashi ha niwa de alexis-san to diego-san no ookii nooto ikura desu ka"
 
 <div align=center>
-<img width="800" alt="Screenshot From 2026-04-27 11-13-02" src="https://github.com/user-attachments/assets/c00d0d55-bd99-4ffd-8a9a-c29416da2135" />
+<img width="600" alt="Screenshot From 2026-04-27 11-13-02" src="https://github.com/user-attachments/assets/c00d0d55-bd99-4ffd-8a9a-c29416da2135" />
 </div>
 
 **Rejected Sentences**
 1."ashita ima ni saito-san ha kono kaban wo kaimasu ka"
 
 <div align=center>
-<img width="400" alt="Screenshot From 2026-04-27 11-15-14" src="https://github.com/user-attachments/assets/32ae6559-43f9-4eee-8bd3-ed6ae3ef424b" />
+<img width="200" alt="Screenshot From 2026-04-27 11-15-14" src="https://github.com/user-attachments/assets/32ae6559-43f9-4eee-8bd3-ed6ae3ef424b" />
 </div>
 
 2."saito-san ga kono kaban wo kaimasu ka"
 
 <div align=center>
-<img width="400" alt="Screenshot From 2026-04-27 11-16-03" src="https://github.com/user-attachments/assets/f074cf32-5970-4adb-8d4d-c4f3f2d4187d" />
+<img width="200" alt="Screenshot From 2026-04-27 11-16-03" src="https://github.com/user-attachments/assets/f074cf32-5970-4adb-8d4d-c4f3f2d4187d" />
 </div>
 
 3."mariko-san ha kono hon kaimasu ka"
 
 <div align=center>
-<img width="400" alt="Screenshot From 2026-04-27 11-16-57" src="https://github.com/user-attachments/assets/a58c8268-99b7-4a7e-bba6-2ff15125cc1a" />
+<img width="200" alt="Screenshot From 2026-04-27 11-16-57" src="https://github.com/user-attachments/assets/a58c8268-99b7-4a7e-bba6-2ff15125cc1a" />
 </div>
 
 4."ashita ni mariko-san ha kono kaban de wo kaimasu ka"
 
 <div align=center>
-<img width="400" alt="Screenshot From 2026-04-27 11-17-43" src="https://github.com/user-attachments/assets/954da2e5-cf3b-4e6c-b057-221b3084f6fb" />
+<img width="200" alt="Screenshot From 2026-04-27 11-17-43" src="https://github.com/user-attachments/assets/954da2e5-cf3b-4e6c-b057-221b3084f6fb" />
 </div>
 
 As it can be previously seen, the rejection of strings in the LL(1) developed by Princeton is more evident that the rejection of the program developed with the <code>nltk</code>, yet still the obtention of the same results in both implementations support the correct JPQG design. And that the usage of the same sentences in both places produces the same results.
@@ -1004,18 +1010,91 @@ As it can be previously seen, the rejection of strings in the LL(1) developed by
 
 ## Analysis
 
+Finally, as the last section of the development, a complete analysis over the placement of the original and the final version of the Japanese Polar Question Grammar in the Chomsky Hierarchy, and their difference over their respective time and space complexity will be performed in the next three classifications:
+
+### Chomsky Hierarchy Clasification
+The **Chomsky Hierarchy** developed by Noam Chosmky in the decade of 1950s, is a classification of formal grammars (and the languages they generate and the type of machines that accept their processing and parsing) into four types. The classification of a grammar into one for this four categories can depend on various factors that differentiate a grammar from another one, as the structure of their productions and the limitations of machines that can and cannot process them; both of them will me applied in the current analysis.
+
+Before being able to classify the original and final **JPQG**, each type of the hierarchy will be decomposed:
+
+| Type | Grammar | Production | Language | Machine |
+|------|--------|------------|----------|---------|
+| Type 0 | Unrestricted grammars, phrase-structured grammars | α → β, where α ∈ (V ∪ Σ)^+ and β ∈ (V ∪ Σ)^* | Recursively enumerable languages | Turing machine |
+| Type 1 | Context-Sensitive grammars, Monotonic grammars | αAβ → αγβ, where γ ∈ (V ∪ Σ)^+ and |αγβ| ≥ |αAβ| | Context-Sensitive languages | Linear-bounded automata |
+| Type 2 | Context-Free grammars | A → γ, where A ∈ V and γ ∈ (V ∪ Σ)^* | Context-Free languages | Pushdown automata |
+| Type 3 | Regular grammars, Left-linear / Right-linear grammars | A → aB \| a (right-linear) OR A → Ba \| a (left-linear) | Regular languages | Deterministic and nondeterministic finite automata |
+
+It is important to mention that each type in the hierarchy is also part of the lower types, as a Type 2 is also Type 1 and 0 simultaneously; however, no Type 3. The higher the type goes, the more limited or restricted are the rules and the grammar productions that create the characteristics of these grammars.
+
+The productions of the original JPQG and the final JPQG have no real difference between their form as the only modification of them were the left-recursion and ambiguity eliminations, yet the form of the productions stayed as:
+<div align=center>
+$A \rightarrow y$ Where A ∈ V and γ ∈ (V ∪ Σ)^*
+</div>
+As none of the leftside of any production or any of both grammars has more than one non-terminal and none terminals, the inmediate rejection of any of them being a Context-Sensitive grammar and therefore Type 1 is confirmed. On the other side, many of the productions in both grammars surpass the productions of a Grammar of Type 3 in the Chomsky hierarchy as the initial state of S having 3 non-terminals and one terminal, or the O production having either two or three non-terminals, leaving behind any idea of being a Type 3.
+
+The connection of these three facts lead to the classifications of both grammars as a Type 2 making them Context-Free grammars.
+
+In addition to this conclusion, the usage of a finite automata for parsing the generated strings is inmediately refused as the required memory to process the language surpasses any available for a finite automaton, as the usage of possible multiple subjects require the machine to store the number of particles to (と) between subjects, and the nested dependencies in the grammar as the production of the O non-terminal requires the storage of one section of the non-terminal before advancing to the following one.
+
+For these reasons following the Chomsky hierarchy and the characteristics of the structures and machines that form its classification, both versions of the JPQG are Type 2 - Context-Free Grammars; however its important to notice that only the final version can be parsed by an LL(1) and there are both time and space complexity differences between them.
 <br>
 
-### Original JQPSG Complexity
+### Time Complexity
+It is important to notice that in the time and space complexity analysis:
+- **n**: Represent the number of tokens of the given string to tests / length of the input string. 
 
+In order to make a time and space complexity analysis not only the grammars must be analyzed but an specific parser must be chosen to perform the comparison over. As there is the possibility of creating infinite recursion in a LL(1) parser using the original JPQG, an additional parser will be chosen to perform both comparisons, which is a Top-Down parser with backtracking. Before performing any analysis the Top-Down parser with backtracking will be briefly explained below, as the LL(1) already has a detailed description in the Cleaning section of the present document:
+
+- **Top-Down Leftmost parser**: Construct derivations by applying rules to the leftmost variable of a sentential form. If left recusion if is present, it would generate an infinite loop within itself that ends for crashing the parser algorithm.
+- **With backtracking**: Meaning it can get back to check a derivation in case one of the alternate paths introduced by ambiguity was not the proper one for a given string. For this purpose, the parser stores in memory the previous states in order to go back and revert changes to try more than one path that could be generated by the grammar.
+
+Based on the previous information, the time and space complexity of each grammar will be decomposed into both parsers to make a broader analysis of the implications the existance of left-recursion and ambiguity have over these factors.
+
+**Original JPQG**:
+LL(1): Infinite. The presence of left-recursion creates and infinite loop for calling and deriving the non-terminal T at the start of the grammar which leads to an infinite loop that theorically never stops, but in reallity ends up being stopped due to excessive time consumption.
+
+Top-Down Parser with Backtracking: O(n^2) to Infinite. The method of this parser makes the time complexity exponential as all combinations of the grammar are tried in order to try to find onw that fits (usage of backtracking); however, the presence of the left-recursion similarly to the previous parser makes the time go to infinite, as the initial path of T deriving T never ends up, not being able to parse any other available path, ending up identically to the first parser.
+
+Both: infinite due to left-recursion.
+
+**Final JPQG**:
+LL(1): O(n). The time complexity it takes an LL(1) to parse a given string is proportional to the length of the string. As the parser is read from left to right, only by the left-most element and no left-recursion nor ambiguity is presented, it takes only the given length of the string to go once through the available grammar looking for the matches until either it finished or is rejected by the presence of an unknown word, lack of a neccesary word or any word mispelling. This time is optimal compared to the original grammar.
+
+Top-Down Parser with Backtracking: O(n). As this parsing algorithm only expands the capacities of the LL(1) by adding backtracking, it will take the same time complexity to parse the given string, as no backtracking is even required or used in the process.
+
+Both: O(n).
 <br>
 
-### Final JQPSG Complexity
+### Space Complexity
+
+**Original JPQG**:
+LL(1): Cannot be determined. Taking into consideration the hypothetical case where the parser finished parsing the given string without ambiguity, due to the properties of the LL(1) its space complexity will be O(n). However, taking into consideration the presence of the left-recursion as it can not be processed, its imposible to determine.
+
+Top-Down Parser with Backtracking: O(n). Due to the properties of the parser with backtracking as even if going though a path and coming back with backtracking the passed stages would not be kept but taken out and later substitute again with the correct path followed afterwards, leading to a space complexity of O(n).
+
+**Final JPQG**:
+LL(1): O(n) as the LL(1) stores the only possible path available and its direclty proportional to the length of the given string. There is no excessive memory needed for the process.
+
+Top-Down Parser with Backtracking: O(n). Similarly to the time complexity of the final grammar when using the Top-down parser with backtracking it only has more capacities that are not used in the process, leading to the same result as the LL(1).
+
+Both: O(n).
+<br>
+
+### Results
+Based on the previous analysis, the process and time inverted in the reformation of the grammar in order to eliminate left-recursion and ambiguity may imply the difference between a capable parsing algorithm being able to parse and verify a given string or not even being able to process it at all without a time tending to be infinite and no process being completed at all.
+
+Taking the time to clear a grammar does not changes the obtained language, but marks the difference between a parser being able to process the actual language in order to verify a string or generate one. 
 
 <br>
 
 # Conclusion
+The current work represents the evolution of the previous evidence [**Implementation of a Lexical Anakysis**](https://github.com/RodrigoHTEC10/Implementation_Lexical_Analysis_A01713854) into a deeper understanding of the Theory of Computation and the implications of language processing, going from the creation of a deterministic finite automata to process valid words to the design and implementation of an actual grammar parsed through a LL(1) is a great advance and process that through the connection of several topics leads to the creation of a great knowledge network that form the foundation of the modern computation.
 
+Through the reading of the book *Languages and Machines - An introduction to Computer Science* not only the concepts learned in class became more clear, but also questions emerged, wondering for the possible applications of the learned concepts and learning about the foundations of the ideas and capacities of the context-free grammars. 
+
+The development of the Japanese Polar Question Grammar was ironically the easiest part of the process, understanding the real implications of the actions and decisions being taken during the design of the grammar, the afterwards corrections, and comprehending the processes behind the used tools as the  generation of the First/Follow and Transition tables, or the actual usage of the LL(1) parser provided by Princeton University was the more complex yet rewarding part of the evidence.
+
+The presented evidence is the collection of context-free grammars concepts and its components, the comprehension of parsing algorithms, their differences and limitations, the conceptual difference between the machines performing the processes and the concepts behind them, the classification of grammars in the Chomsky hierarchy following thier productions characteristics and particularies; all while clearning, implementing and testing an own grammar. The final analysis of the grammar demostrates that conceptual modifications over the grammar as eliminating recursion and ambiguity may lead to the same language, but not the same time and space usage; looking for efficiency in the modern applications of the language processing, being able to understand the foundational concepts and their impacts through research and application is the greatest achievement I get from the current project.
 <br>
 
 # References
@@ -1023,6 +1102,8 @@ As it can be previously seen, the rejection of strings in the LL(1) developed by
 Essential Japanese grammar: A comprehensive guide for beginners. (2024, febrero 28). Verbalplanet.com; Verbalplanet. https://www.verbalplanet.com/learn-japanese/blog/basics-of-japanese-grammar.asp
 
 Grammar in theory of computation. (2021, enero 16). GeeksforGeeks. https://www.geeksforgeeks.org/theory-of-computation/introduction-to-grammar-in-theory-of-computation/
+
+Sudkamp, T. A. (1998). Languages and Machines. An introduction to Computer Science (Wring State University, Ed.). Addison-Wesley Educational.
 
 Tofugu. (s/f). Learn Japanese: A ridiculously detailed guide. Tofugu. Recuperado el 27 de abril de 2026, de https://www.tofugu.com/learn-japanese/
 
