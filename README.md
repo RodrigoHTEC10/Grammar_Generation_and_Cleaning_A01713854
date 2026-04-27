@@ -149,7 +149,7 @@ $$V_N = \{ S, A, T, I, H, N, E, M, C, F, P, K, J, O, B, W, X, D, G, V \}$$
 | $T$ | $\rightarrow T$ `ni` $\mid$ `ima` $\mid$ `kyou` $\mid$ `ashita` $\mid \varepsilon$ |
 | $H$ | $\rightarrow N$ `ha` |
 | $N$ | $\rightarrow E$ `to` $N \mid E$ |
-| $E$ | $\rightarrow M \mid C$ |
+| $E$ | $\rightarrow M \mid C$ | N
 | $M$ | $\rightarrow$ `saito-san` $\mid$ `mariko-san` $\mid$ `mira-san` $\mid$ `santos-san` $\mid$ `sakura-san` $\mid$ `juan-san` $\mid$ `alexis-san` $\mid$ `rodrigo-san` $\mid$ `nico-san` $\mid$ `diego-san` $\mid$ `watashi` $\mid$ `anata` |
 | $C$ | $\rightarrow$ `gakusei` $\mid$ `sensei` $\mid$ `isha` $\mid$ `keikan` $\mid$ `shioubashi` |
 | $F$ | $\rightarrow P \ J$ |
@@ -291,6 +291,7 @@ The designed grammar supports the following words used in the following categori
 |を| Direct Object |
 |の| Posessive |
 |か| Question |
+|と| Connection |
 
 </div>
 <br>
@@ -351,7 +352,11 @@ kyou saito-san to mariko-san ha niwa de sono rodrigo-san no takai kaban wo kaima
 
 ### Example.
 
-Example sentence: kyou saito-san to mariko-san ha niwa de sono rodrigo-san no takai kaban wo kaimasu ka
+Example sentence: kyou saito-san to mariko-san ha niwa de sono rodrigo-san no takai kaban wo kaimasu ka.
+
+Below we present the **parse trees** result from parsing the example sentence through a parsing algorithm.
+
+A **parse tree**, **derivation tree** or **Abstract Syntax Tree [AST]** is a graphical method in with a derivation can be visuallized giving special attention not to the order but to the decomposition of each rule and non-terminal symbols in order to accomplish the final string obtention.
 
 <div align=center>
 
@@ -361,25 +366,160 @@ Example sentence: kyou saito-san to mariko-san ha niwa de sono rodrigo-san no ta
 
 </div>
 
+As it can be appreciated there are four ways to arrive to the same string with the actual grammar. The following section will explain the concept of parsing, the importance of clearning ambiguity and left-recursion, the cleaning processes taken and the final form of the grammar.
+
+More **parse trees** will be presented below after each cleaning in order to determine and visuallize the impact of the modification to the parsing of the string.
+
+<br>
+
 ## Cleaning
-At this point the grammar is complete, yet it present some problems that make the parse of the grammar by a given string to find more than one path for
+
+A **parsing algorithm** or **parser** is a procedure designed to generate derivations for strings in the language of the grammar in order to identify the given string can be obtained through derivations starting from the **S** of the grammar.
+
+As there can be many ways to obtain the same string to multiple derivations, one path must be chosen and only one to be able to determine without any ambiguity that the string *w* belong to the language *L*. For this purpose different parsers with different capacities have been designed over the years in order to have different techniques for parsing of greater and more complex grammars. 
+
+For the current evidence a **Top-Down Leftmost parser without backtracing and no recursive descent** LL(1) is used:
+
+- **Top-Down Leftmost parser**: Construct derivations by applying rules to the leftmost variable of a sentential form. If left recusion if is present, it would generate an infinite loop within itself that ends for crashing the parser algorithm.
+- **Without backtracking**: Meaning it can not get back to check for different derivations as it does not store previous rules or places. If ambiguity is present and the sentences does not adapts in one of the possible paths for the string derivation, going back would be necessary yet impossible, leading either to crash the parser algorithm or give a false result.
+- **Non recursive descent**: It uses a manual stack for parsing instead of a recursive call to the parser.
+
+To be able to use this parser, both **left-recursion** and **ambiguity must be eliminated** from the grammar; requiring to make modifications in order to obtain a grammar that respects the same syntactic structure and allows a leftmost parsing process. 
+
+Furthermore, the importance of the elimination of ambiguity in computational terms could be explained as follows. If a program has two ways to arrive to the same result, yet each of them triggers a different behavior; with the same input it could be giving different outputs without the user changing anything between one use or another, making it a program hard to debug and impossible to predict. Have ambiguity in a language represents the same danger. By limiting to only one path, only one parse tree, the program would behave and react as expected.
 
 <br>
 
 ### Left recursion cleaning
+**Identification:**
 
+The left-recursion is present at the mere start of the grammar, at the production:
+
+$T$ $\rightarrow T$ `ni` $\mid$ `ima` $\mid$ `kyou` $\mid$ `ashita` $\mid \varepsilon$
+
+This production has the form A $\rightarrow A$ a | B, which can be solved using the following formula:
+
+<div align=center>
+Substituting the production with left recursion for two productions.
+
+A $\rightarrow A$ a | B become:
+
+A $\rightarrow B$ A'
+
+A' $\rightarrow a$ A' | $\varepsilon$
+</div>
+
+**Resolution**
+
+$T$ $\rightarrow$ `ima` I  $\mid$ `kyou` I $\mid$ `ashita` I $\mid$ $\varepsilon$ 
+
+$I$ $\rightarrow $ `ni` I $\mid$  $\varepsilon$ 
+
+By passing the actual time words to the first terminal and only calling the second terminal to use the particle 'ni', the elimination of the left-recursion is successfull. However, a modification based on the grammar constraint that a particle can not be presented more than two times and the actual I non-terminal allows it the following modification is made:
+
+$I$ $\rightarrow $ `ni` $\mid$  $\varepsilon$ 
 
 <br>
 
 ### Ambiguity cleaning
+The ambiguity on the other hand, is presented by two non-terminals when trying to connect several subjects at the same time through the use of the particle to(と).
 
+$N$ $\rightarrow E$ `to` $N \mid E$ 
 
+$E$ $\rightarrow M \mid C \mid N$ 
 
+As the parser is able to form the connection: saito-san to mariko-san as:
+
+```
+N -> M to N
+E -> M
+M -> saito-san
+N -> M 
+M -> mariko-san
+```
+
+or 
+
+```
+N -> M to N
+E -> M
+M -> saito-san
+N -> N
+N -> E
+(Loop that can be repeated n times)
+E -> M 
+M -> mariko-san
+```
+As more than one derivation tree can be obtained to determine a string belongs to a language, the current grammar is ambiguos.
+
+**Resolution**
+In order to observe the influence of each element into N, the substitution of E into N is performed:
+
+$N$ $\rightarrow (C \mid M \mid N)$ `to` $N \mid (C \mid M \mid N)$ 
+
+By making an expantion of it we obtain:
+
+$N$ $\rightarrow C$ `to`$N \mid M$ `to` $N \mid N$ `to` $N \mid C \mid M \mid N$ 
+
+As N->N and N only affirm the existance and identity of N these can be eliminated giving:
+
+$N$ $\rightarrow C$ `to`$N \mid M$ `to` $N \mid C \mid M$ 
+
+Now, by assuming the division of this statement into an $A$ a | B format similar to the previous example we can get:
+
+B = $C$ `to`$N \mid M$ `to` $N \mid C \mid M$
+
+a = `to` $N$ |  $\varepsilon$ 
+
+Applying the same elimination method as before, the rewrite of the non-terminals become:
+
+$N \rightarrow M E \mid C E $
+
+$E \rightarrow$ `to` $M E \mid$ `to` $C E \mid \varepsilon$ 
+
+Eliminating the ambiguity from the given grammar.
 <br>
 
 ### Final clean version
 
+<div align=center>
 
+#### Formal Grammar Definition
+
+$$G = (V_T, V_N, S, R)$$
+
+**$V_N$ — Non-terminal symbols**
+
+$$V_N = \{ S, A, T, I, H, N, E, M, C, F, P, K, J, O, B, W, X, D, G, V \}$$
+
+Conserving the same $S$ and $V_T$
+
+**$R$ — Production rules**
+
+| Non-terminal | Production |
+|---|---|
+| $S$ | $\rightarrow T \ H \ F \ A$ |
+| $A$ | $\rightarrow$ `ka` $\mid \varepsilon$ |
+| $T$ | $\rightarrow$ `ima` $I \mid$ `kyou` $I \mid$ `ashita` $I \mid \varepsilon$ |
+| $I$ | $\rightarrow$ `ni` $\mid \varepsilon$ |
+| $H$ | $\rightarrow N$ `ha` |
+| $N$ | $\rightarrow M \ E \mid C \ E$ |
+| $E$ | $\rightarrow$ `to` $M \ E \mid$ `to` $C \ E \mid \varepsilon$ |
+| $M$ | $\rightarrow$ `saito-san` $\mid$ `mariko-san` $\mid$ `mira-san` $\mid$ `santos-san` $\mid$ `sakura-san` $\mid$ `juan-san` $\mid$ `alexis-san` $\mid$ `rodrigo-san` $\mid$ `nico-san` $\mid$ `diego-san` $\mid$ `watashi` $\mid$ `anata` |
+| $C$ | $\rightarrow$ `gakusei` $\mid$ `sensei` $\mid$ `isha` $\mid$ `keikan` $\mid$ `shioubashi` |
+| $F$ | $\rightarrow P \ J$ |
+| $P$ | $\rightarrow K$ `de` $\mid \varepsilon$ |
+| $K$ | $\rightarrow$ `kouen` $\mid$ `niwa` $\mid$ `daigaku` $\mid$ `ichiba` $\mid$ `ginkou` $\mid$ `kiisaten` $\mid$ `umi` $\mid$ `konbini` |
+| $J$ | $\rightarrow O$ `wo` $V \mid O$ `ikura` `desu` |
+| $O$ | $\rightarrow B \ W \ X \mid W \ X$ |
+| $B$ | $\rightarrow$ `kono` $\mid$ `sono` $\mid$ `ano` |
+| $W$ | $\rightarrow M$ `no` $\mid C$ `no` $\mid \varepsilon$ |
+| $X$ | $\rightarrow D \ G \mid G$ |
+| $D$ | $\rightarrow$ `kawaii` $\mid$ `ookii` $\mid$ `chiisai` $\mid$ `yasai` $\mid$ `takai` |
+| $G$ | $\rightarrow$ `hon` $\mid$ `koohi` $\mid$ `nooto` $\mid$ `zaashi` $\mid$ `kasa` $\mid$ `kaban` $\mid$ `kuruma` $\mid$ `terebi` $\mid$ `wain` |
+| $V$ | $\rightarrow$ `kaimasu` $\mid$ `misemasu` $\mid$ `mimasu` $\mid$ `agemasu` $\mid$ `kashimasu` $\mid$ `hoshiimasu` $\mid$ `urimasu` $\mid$ `hakobimasu` $\mid$ `sutemasu` |
+
+</div>
 <br>
 
 ## Implementation
