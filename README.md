@@ -885,7 +885,40 @@ At the end of each array tested a counter is presented showing the:
 Approved sentences: [NO. of approved sentences] / [Total of sentences in the array]
 Rejected sentences: [NO. of rejected sentences] / [Total of sentences in the array]
 ```
-In the present section, 8 of these sentences will be shown (4 approved and 4 rejected) and explained in detail.
+
+In order to be able to run the file, the installation of the <code>nltk</code> is required, it can be done by using the following commands depending on the operating system:
+
+
+Windows & MacOS (it it has pip)
+```
+pip install nltk
+```
+
+Linux
+```
+sudo apt install pip
+sudo apt install python3-nltk
+```
+
+Or use a virtual environment as:
+
+
+Windows
+```
+python -m venv venv
+venv\Scripts\activate
+pip install nltk
+```
+
+MacOS & Linux
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install nltk
+```
+
+
+In the present section, 8 of these sentences will be shown (4 approved and 4 rejected) and explained in detail. The testing file constains the total of 115 sentences only naming if its <code>ACCEPTED</code> or <code>REJECTED</code>.
 
 **Approved Sentences**
 1."rodrigo-san ha konbini de kono watashi no chiisai kaban wo kaimasu ka"

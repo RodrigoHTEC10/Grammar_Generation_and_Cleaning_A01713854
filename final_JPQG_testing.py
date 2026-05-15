@@ -188,6 +188,11 @@ invalid_sentences = [
 
 sentence = "ashita ima ni saito-san ha kono kaban wo kaimasu ka"
 
+# To be able to test the current file, the installation of the 
+# nltk is neccesary. Refer to Testing section,
+# Use of the Natural Language Processing Toolkit for details.
+
+
 import nltk
 from nltk import CFG
 
@@ -218,7 +223,7 @@ grammar = CFG.fromstring("""
 """)
 
 parser = nltk.ChartParser(grammar, trace=0)
-tokens = nltk.word_tokenize(sentence, language='english')
+tokens = sentence.split()
 trees = list(parser.parse(tokens))
 
 if trees:
@@ -239,7 +244,7 @@ print("=============== APPROVED SENTENCES ===============\n")
 print()
 for ele in valid_sentences:
     try:
-        tokens = nltk.word_tokenize(ele, language='english')
+        tokens = ele.split()
         trees = list(parser.parse(tokens))
         if (len(trees) == 1):
             counter = counter + 1
@@ -266,7 +271,7 @@ print()
 
 for ele in invalid_sentences:
     try:
-        tokens = nltk.word_tokenize(ele, language='english')
+        tokens = ele.split()
         trees = list(parser.parse(tokens))
         if (len(trees) == 1):
             counter = counter + 1
