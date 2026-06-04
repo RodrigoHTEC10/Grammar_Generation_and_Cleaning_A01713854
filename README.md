@@ -425,14 +425,14 @@ A' $\rightarrow a$ A' | $\varepsilon$
 
 $T$ $\rightarrow$ `ima` I  $\mid$ `kyou` I $\mid$ `ashita` I $\mid$ $\varepsilon$ 
 
-$I$ $\rightarrow $ `ni` I $\mid$  $\varepsilon$ 
+$I$ $\rightarrow$ `ni` I $\mid$  $\varepsilon$ 
 
 </div>
 
 By passing the actual time words to the first terminal and only calling the second terminal to use the particle 'ni', the elimination of the left-recursion is successful. However, a modification based on the grammar constraint that a particle can not be presented more than two times and the actual I non-terminal allows it the following modification is made:
 <div align=center>
 
-$I$ $\rightarrow $ `ni` $\mid$  $\varepsilon$ 
+$I$ $\rightarrow$ `ni` $\mid$  $\varepsilon$ 
 
 </div>
 
@@ -800,7 +800,7 @@ $J2 \rightarrow$ `wo` $V \mid$ `ikura desu`
 
 <div align=center>
 
-$E \rightarrow $ `to` $N2 E \mid \varepsilon$
+$E \rightarrow$ `to` $N2 E \mid \varepsilon$
 
 $N2 \rightarrow C \mid M$ 
 
