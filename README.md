@@ -26,6 +26,7 @@ A grammar is composed of two categories:
 noun -> 'dog', 'cat', 'I', 'you', ...
 ```
 <br>
+
 From these elements the **rules** or **productions** of the grammar are defined as the formal instructions of how a nonterminal symbol can be rewritten as a sequence of terminals and non-terminals.
 
 To generate a string starting from the starting point of the grammar *S*, we perform a series of derivations using the defined productions of the grammar to substitute nonterminal symbols for other equivalent nonterminals or terminals until we end up with a valid string of the language. 
@@ -401,11 +402,13 @@ The left-recursion is present at the mere start of the grammar, at the productio
 <div align=center>
 
 $T$ $\rightarrow T$ `ni` $\mid$ `ima` $\mid$ `kyou` $\mid$ `ashita` $\mid \varepsilon$
+
 </div>
 
 This production has the form A $\rightarrow A$ a | B, which can be solved using the following formula:
 
 <div align=center>
+
 Substituting the production with left recursion for two productions.
 
 A $\rightarrow A$ a | B become:
@@ -413,6 +416,7 @@ A $\rightarrow A$ a | B become:
 A $\rightarrow B$ A'
 
 A' $\rightarrow a$ A' | $\varepsilon$
+
 </div>
 
 **Resolution**
@@ -422,12 +426,14 @@ A' $\rightarrow a$ A' | $\varepsilon$
 $T$ $\rightarrow$ `ima` I  $\mid$ `kyou` I $\mid$ `ashita` I $\mid$ $\varepsilon$ 
 
 $I$ $\rightarrow $ `ni` I $\mid$  $\varepsilon$ 
+
 </div>
 
 By passing the actual time words to the first terminal and only calling the second terminal to use the particle 'ni', the elimination of the left-recursion is successful. However, a modification based on the grammar constraint that a particle can not be presented more than two times and the actual I non-terminal allows it the following modification is made:
 <div align=center>
 
 $I$ $\rightarrow $ `ni` $\mid$  $\varepsilon$ 
+
 </div>
 
 <br>
@@ -530,7 +536,7 @@ Conserving the same $S$ and $V_T$
 | Non-terminal | Production |
 |---|---|
 | $S$ | $\rightarrow T \ H \ F \ A$ |
-| $A$ | $\rightarrow$ `ka` $ |
+| $A$ | $\rightarrow$ `ka` |
 | $T$ | $\rightarrow$ `ima` $I \mid$ `kyou` $I \mid$ `ashita` $I \mid \varepsilon$ |
 | $I$ | $\rightarrow$ `ni` $\mid \varepsilon$ |
 | $H$ | $\rightarrow N$ `ha` |
@@ -560,7 +566,7 @@ As the final version of the grammar, an explanation of each production will be g
 
 Starting point that declares the available non-terminals that any string in L must have, whicth is T (time), H (subject(s)), F (object + verb) + A (question particle ka(か))
 
-- $A$ $\rightarrow$ `ka`$ 
+- $A$ $\rightarrow$ `ka`
 
 Question particle (か). Taken away from the original **S** in order to have a more clear visuallization of the parse tree.
 
@@ -787,6 +793,7 @@ Applied modifications:
 $J \rightarrow O $
 
 $J2 \rightarrow$ `wo` $V \mid$ `ikura desu` 
+
 </div>
 
 - Development of N2: Similarly to the problem of J2, the repetition of 'to' in two cases of M and C lead to the creation of JS to be either M or C leading to the following development.
@@ -796,6 +803,7 @@ $J2 \rightarrow$ `wo` $V \mid$ `ikura desu`
 $E \rightarrow $ `to` $N2 E \mid \varepsilon$
 
 $N2 \rightarrow C \mid M$ 
+
 </div>
 
 <br>
